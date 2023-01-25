@@ -9,8 +9,6 @@ const gameBoard = () => {
 const newBoard = gameBoard();
 const a =newBoard.board;
 
-displayBoard();
-
 function displayBoard () {
     for(let i = 0; i < 9; i++) {
         cells[i].textContent = a[i];
@@ -19,13 +17,15 @@ function displayBoard () {
 let turn = 1;
 function check (e) {
     let cell = e.target.id;
-    if(turn == 1) {
+    if(turn == 1 && a[cell] == "") {
        addX(cell);
        turn++;
     }
     else {
-        addO(cell);
-        turn--;
+        if(a[cell] == "") {
+            addO(cell);
+            turn--;
+        }
     }
 }
 
@@ -37,6 +37,7 @@ function addX (cell) {
     a[cell] = "X";
     displayBoard();
 }
+
 function addO (cell) {
     a[cell] = "O";
     displayBoard();
